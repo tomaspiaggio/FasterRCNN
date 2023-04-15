@@ -42,10 +42,10 @@ class RegionProposalNetwork(tf.keras.Model):
     anchors_per_location = 9
 
     # 3x3 convolution over input map producing 512-d result at each output. The center of each output is an anchor point (k anchors at each point).
-    self._rpn_conv1 = Conv2D(name = "rpn_conv1", kernel_size = (3,3), strides = 1, filters = 512, padding = "same", activation = "relu", kernel_initializer = initial_weights, kernel_regularizer = regularizer)
+    self._rpn_conv1 = Conv2D(name="rpn_conv1", kernel_size=(3,3), strides=1, filters=512, padding="same", activation="relu", kernel_initializer=initial_weights, kernel_regularizer=regularizer)
 
     # Classification layer: predicts whether there is an object at the anchor or not. We use a sigmoid function, where > 0.5 is indicates a positive result.
-    self._rpn_class = Conv2D(name = "rpn_class", kernel_size = (1,1), strides = 1, filters = anchors_per_location, padding = "same", activation = "sigmoid", kernel_initializer = initial_weights)
+    self._rpn_class = Conv2D(name="rpn_class", kernel_size=(1,1), strides=1, filters=anchors_per_location, padding="same", activation="sigmoid", kernel_initializer=initial_weights)
 
     # Box delta regression
     self._rpn_boxes = Conv2D(name = "rpn_boxes", kernel_size = (1,1), strides = 1, filters = 4 * anchors_per_location, padding = "same", activation = None, kernel_initializer = initial_weights)
